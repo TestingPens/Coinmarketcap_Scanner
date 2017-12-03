@@ -1,4 +1,4 @@
-# Coinmarketcap_Scanner
+# Coinmarketcap Scanner
 Scan Coinmarketcap gainers and losers stats to detect dips/pumps. This helps for identifying trade entry and exit points and is great for those who want to BTFD.
 This application requires Python 2.7.
 
