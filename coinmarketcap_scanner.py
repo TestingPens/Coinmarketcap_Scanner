@@ -2,6 +2,7 @@
 #Requirements: pip install https://github.com/mondeja/pymarketcap/archive/master.zip
 
 from pymarketcap import Pymarketcap
+import ConfigParser
 import time
 
 class bcolours:
@@ -17,23 +18,26 @@ def get_stats(perc, timeframe, volume):
     for k1,v1 in losers.iteritems():
         for line in v1:
             if (line['percent_change'] < -perc and line['24h_volume_usd'] > volume):
-                print bcolours.RED + '[%s, Perc.+: %s, Price: $%s, Volume: $%s]' % (line['symbol'], line['percent_change'], line['price_usd'], line['24h_volume_usd']) + bcolours.ENDC
+                print bcolours.RED + '[%s, %% Loss: %s, Price: $%s, Volume: $%s]' % (line['symbol'], line['percent_change'], line['price_usd'], line['24h_volume_usd']) + bcolours.ENDC
     
     for k1,v1 in gainers.iteritems():
         for line in v1:
             if (line['percent_change'] > perc and line['24h_volume_usd'] > volume):
-                print bcolours.GREEN + '[%s, Perc.-: %s, Price: $%s, Volume: $%s]' % (line['symbol'], line['percent_change'], line['price_usd'], line['24h_volume_usd']) + bcolours.ENDC
+                print bcolours.GREEN + '[%s, %% Gain: %s, Price: $%s, Volume: $%s]' % (line['symbol'], line['percent_change'], line['price_usd'], line['24h_volume_usd']) + bcolours.ENDC
     print '=============================================================================='
     time.sleep(timeframe)
-if __name__ == "__main__":
-    #Edit this 
-    timeframe = 10 #minutes
-    perc = 10
-    volume = 100000
-    
+if __name__ == "__main__":   
     try:
-        print "[^] Starting Dip Scanner..."	
-        print "[^] Time frame: " + str(timeframe) + " min"	
+        Config = ConfigParser.ConfigParser()
+        Config.read("config.ini")
+
+        print "[*] Starting Coinmarketcap Scanner..."	
+        timeframe = int(Config.get('Config', 'Timeframe'))
+        perc = int(Config.get('Config', 'Percentage'))
+        volume = int(Config.get('Config', 'Volume'))
+        print "[*] Timeframe: " + str(timeframe) + "min"	
+        print "[*] Percentage: " + str(perc) + "%"
+        print "[*] Volume: $" + str(volume)
         while(True):
             get_stats(perc, timeframe * 60, volume)
     except Exception, e:
