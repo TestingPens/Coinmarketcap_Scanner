@@ -18,13 +18,13 @@ def get_stats(perc, timeframe, volume):
     for k1,v1 in losers.items():
         for line in v1:
             if (line['percent_change'] < -perc and line['24h_volume_usd'] > volume):
-                print(bcolours.RED + '[%s, %% Loss: %s, Price: $%s, Volume: $%s]' % (line['symbol'], line['percent_change'], line['price_usd'], line['24h_volume_usd']) + bcolours.ENDC)
+                print(bcolours.RED + '[%s, %% Loss: %s, Price: $%s, Volume: $%s] -> https://coinmarketcap.com/currencies/%s/' % (line['symbol'], line['percent_change'], line['price_usd'], line['24h_volume_usd'], line['name']) + bcolours.ENDC)
     
     for k1,v1 in gainers.items():
         for line in v1:
             if (line['percent_change'] > perc and line['24h_volume_usd'] > volume):
-                print(bcolours.GREEN + '[%s, %% Gain: %s, Price: $%s, Volume: $%s]' % (line['symbol'], line['percent_change'], line['price_usd'], line['24h_volume_usd']) + bcolours.ENDC)
-    print('================================================================')
+                print(bcolours.GREEN + '[%s, %% Gain: %s, Price: $%s, Volume: $%s] -> https://coinmarketcap.com/currencies/%s/' % (line['symbol'], line['percent_change'], line['price_usd'], line['24h_volume_usd'], line['name']) + bcolours.ENDC)
+    print('=======================================================================================================================================')
     time.sleep(timeframe)
 if __name__ == "__main__":   
     try:
@@ -38,7 +38,7 @@ if __name__ == "__main__":
         print("[*] Timeframe: " + str(timeframe) + "min")	
         print("[*] Percentage: " + str(perc) + "%")
         print("[*] Volume: $" + str(volume))
-        print('================================================================')
+        print('=======================================================================================================================================')
         while(True):
             get_stats(perc, timeframe * 60, volume)
     except Exception as e:
