@@ -3,7 +3,7 @@ Scan Coinmarketcap gainers and losers stats to detect dips/pumps. This helps for
 This application requires Python 3.
 
 ### Downloading Project Source
-git clone https://github.com/Prophetic-Pariah/Coinmarketcap_Scanner.git
+git clone https://github.com/TestingPens/Coinmarketcap_Scanner.git
 
 ### Installation Requirements
 pip install https://github.com/mondeja/pymarketcap/archive/master.zip
